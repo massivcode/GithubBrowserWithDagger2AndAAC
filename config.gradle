@@ -1,0 +1,18 @@
+ext {
+    // build
+    buildToolsVersion = '27.0.2'
+    minSdkVersion = 15
+    compileSdkVersion = 27
+    targetSdkVersion = 27
+
+    // gradle
+    gradleVersion = '3.0.1'
+
+    // libraries
+    supportLibraryVersion = '27.0.2'
+    retrofitVersion = '2.3.0'
+    aacVersion = '1.0.0'
+    glideVersion = '4.4.0'
+    realmVersion = '4.3.1'
+    daggerVersion = '2.13'
+}
