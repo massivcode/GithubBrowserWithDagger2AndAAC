@@ -15,4 +15,5 @@ ext {
     glideVersion = '4.4.0'
     realmVersion = '4.3.1'
     daggerVersion = '2.13'
+    butterKnifeVersion = '8.8.1'
 }
