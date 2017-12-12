@@ -1,4 +1,4 @@
-package com.massivcode.githubbrowserwithdagger2andaac.ui.main.viewmodels;
+package com.massivcode.githubbrowserwithdagger2andaac.ui.login;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;

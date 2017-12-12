@@ -1,4 +1,4 @@
-package com.massivcode.githubbrowserwithdagger2andaac.ui.main;
+package com.massivcode.githubbrowserwithdagger2andaac.ui.login;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -15,11 +15,12 @@ import android.widget.TextView.OnEditorActionListener;
 import butterknife.BindView;
 import com.massivcode.githubbrowserwithdagger2andaac.R;
 import com.massivcode.githubbrowserwithdagger2andaac.base.BaseActivity;
+import com.massivcode.githubbrowserwithdagger2andaac.models.local.SearchSuggestion;
 import com.massivcode.githubbrowserwithdagger2andaac.models.local.User;
 import com.massivcode.githubbrowserwithdagger2andaac.repositories.Resource;
 import com.massivcode.githubbrowserwithdagger2andaac.repositories.Status;
-import com.massivcode.githubbrowserwithdagger2andaac.ui.main.viewmodels.LoginViewModel;
 import com.massivcode.githubbrowserwithdagger2andaac.utils.log.DLogger;
+import io.realm.RealmResults;
 
 public class LoginActivity extends BaseActivity {
 
@@ -42,6 +43,14 @@ public class LoginActivity extends BaseActivity {
 
     mLoginNameAppCompatAutoCompleteTextView.setOnEditorActionListener(
         mOnLoginNameEditorActionListener);
+
+    mViewModel.getSearchSuggestionLiveData().observe(this,
+        new Observer<RealmResults<SearchSuggestion>>() {
+          @Override
+          public void onChanged(@Nullable RealmResults<SearchSuggestion> searchSuggestions) {
+
+          }
+        });
   }
 
   private OnEditorActionListener mOnLoginNameEditorActionListener = new OnEditorActionListener() {
@@ -70,6 +79,10 @@ public class LoginActivity extends BaseActivity {
       }
 
       setProgressBarVisibility(userResource.status);
+
+      if (userResource.status == Status.SUCCESS) {
+        mViewModel.addSearchSuggestion(userResource.data.getLoginName());
+      }
 
       DLogger.d("results->\t" + userResource);
     }
