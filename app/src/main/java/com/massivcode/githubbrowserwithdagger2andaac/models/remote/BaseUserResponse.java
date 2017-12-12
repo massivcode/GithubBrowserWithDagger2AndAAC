@@ -1,6 +1,7 @@
-package com.massivcode.githubbrowserwithdagger2andaac.models;
+package com.massivcode.githubbrowserwithdagger2andaac.models.remote;
 
 import com.google.gson.annotations.SerializedName;
+import com.massivcode.githubbrowserwithdagger2andaac.models.local.Owner;
 
 /**
  * Created by massivcode@gmail.com on 2017-12-11.
@@ -56,5 +57,9 @@ public class BaseUserResponse {
         ", htmlUrl='" + htmlUrl + '\'' +
         ", type='" + type + '\'' +
         '}';
+  }
+
+  public Owner toOwner() {
+    return new Owner(getId(), getLoginName(), getAvatarUrl(), getGravatarId(), getHtmlUrl(), getType());
   }
 }

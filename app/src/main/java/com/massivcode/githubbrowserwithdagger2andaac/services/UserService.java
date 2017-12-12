@@ -1,9 +1,9 @@
 package com.massivcode.githubbrowserwithdagger2andaac.services;
 
-import com.massivcode.githubbrowserwithdagger2andaac.models.BaseUserResponse;
-import com.massivcode.githubbrowserwithdagger2andaac.models.GistResponse;
-import com.massivcode.githubbrowserwithdagger2andaac.models.RepositoryResponse;
-import com.massivcode.githubbrowserwithdagger2andaac.models.UserResponse;
+import com.massivcode.githubbrowserwithdagger2andaac.models.remote.BaseUserResponse;
+import com.massivcode.githubbrowserwithdagger2andaac.models.remote.GistResponse;
+import com.massivcode.githubbrowserwithdagger2andaac.models.remote.RepositoryResponse;
+import com.massivcode.githubbrowserwithdagger2andaac.models.remote.UserResponse;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.GET;

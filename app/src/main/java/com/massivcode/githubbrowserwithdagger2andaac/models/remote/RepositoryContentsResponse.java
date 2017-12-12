@@ -1,4 +1,4 @@
-package com.massivcode.githubbrowserwithdagger2andaac.models;
+package com.massivcode.githubbrowserwithdagger2andaac.models.remote;
 
 /**
  * Created by massivcode@gmail.com on 2017-12-11.

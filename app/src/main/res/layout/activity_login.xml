@@ -5,7 +5,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context="com.massivcode.githubbrowserwithdagger2andaac.MainActivity">
+  tools:context="com.massivcode.githubbrowserwithdagger2andaac.ui.main.LoginActivity">
 
   <android.support.constraint.Guideline
     android:id="@+id/guide1"
@@ -59,7 +59,17 @@
     android:layout_marginEnd="16dp"
     android:fontFamily="@font/roboto_light"
     android:hint="username"
+    android:imeOptions="actionSearch"
+    android:inputType="text"
+    android:singleLine="true"
     app:layout_constraintTop_toBottomOf="@id/guide3"/>
+
+  <ProgressBar
+    android:id="@+id/progressBar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:visibility="gone"
+    app:layout_constraintBottom_toBottomOf="parent"/>
 
 
 </android.support.constraint.ConstraintLayout>

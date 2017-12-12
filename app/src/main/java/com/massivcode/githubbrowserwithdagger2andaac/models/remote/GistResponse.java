@@ -1,6 +1,10 @@
-package com.massivcode.githubbrowserwithdagger2andaac.models;
+package com.massivcode.githubbrowserwithdagger2andaac.models.remote;
 
 import com.google.gson.annotations.SerializedName;
+import com.massivcode.githubbrowserwithdagger2andaac.models.local.Gist;
+import com.massivcode.githubbrowserwithdagger2andaac.models.local.GistFile;
+import io.realm.RealmList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedHashMap;
 
@@ -84,5 +88,22 @@ public class GistResponse {
         ", owner=" + owner +
         ", isTruncated=" + isTruncated +
         '}';
+  }
+
+  public Gist toGist() {
+    RealmList<GistFile> gistFiles = new RealmList<>();
+
+    if (files != null && !files.isEmpty()) {
+      Collection<GistFileResponse> gistFileResponses = files.values();
+
+      for (GistFileResponse each : gistFileResponses) {
+        GistFile gistFile = each.toGistFile(getId());
+        gistFiles.add(gistFile);
+      }
+    }
+
+    Gist gist = new Gist(id, isPublic, createdAt, updatedAt, description, comments, user, owner.toOwner(), isTruncated);
+    gist.setFiles(gistFiles);
+    return gist;
   }
 }

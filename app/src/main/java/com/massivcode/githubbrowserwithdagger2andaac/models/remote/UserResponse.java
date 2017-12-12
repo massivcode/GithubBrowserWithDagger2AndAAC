@@ -1,6 +1,7 @@
-package com.massivcode.githubbrowserwithdagger2andaac.models;
+package com.massivcode.githubbrowserwithdagger2andaac.models.remote;
 
 import com.google.gson.annotations.SerializedName;
+import com.massivcode.githubbrowserwithdagger2andaac.models.local.User;
 import java.util.Date;
 
 /**
@@ -95,5 +96,12 @@ public class UserResponse extends BaseUserResponse {
         ", createdAt=" + createdAt +
         ", updatedAt=" + updatedAt +
         '}';
+  }
+
+  public User toUser() {
+    return new User(getId(), getLoginName(), getAvatarUrl(), getGravatarId(), getHtmlUrl(),
+        getType(), getName(), getCompany(), getBlog(), getLocation(), getEmail(), getBio(),
+        getPublicRepositoryCounts(), getPublicGistCounts(), getFollowers(), getFollowing(),
+        getCreatedAt(), getUpdatedAt());
   }
 }

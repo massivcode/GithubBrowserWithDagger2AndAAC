@@ -12,6 +12,7 @@ import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
+
   @LayoutRes
   public abstract int setLayoutId();
 
@@ -20,5 +21,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(setLayoutId());
     ButterKnife.bind(this);
+    onViewBind();
   }
+
+  public abstract void onViewBind();
 }

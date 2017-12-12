@@ -1,7 +1,7 @@
 package com.massivcode.githubbrowserwithdagger2andaac.services;
 
-import com.massivcode.githubbrowserwithdagger2andaac.models.GistCommentResponse;
-import com.massivcode.githubbrowserwithdagger2andaac.models.GistResponse;
+import com.massivcode.githubbrowserwithdagger2andaac.models.remote.GistCommentResponse;
+import com.massivcode.githubbrowserwithdagger2andaac.models.remote.GistResponse;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.GET;

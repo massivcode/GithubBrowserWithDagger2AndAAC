@@ -1,6 +1,7 @@
-package com.massivcode.githubbrowserwithdagger2andaac.models;
+package com.massivcode.githubbrowserwithdagger2andaac.models.remote;
 
 import com.google.gson.annotations.SerializedName;
+import com.massivcode.githubbrowserwithdagger2andaac.models.local.GistComment;
 import java.util.Date;
 
 /**
@@ -8,7 +9,6 @@ import java.util.Date;
  */
 
 public class GistCommentResponse {
-
   private long id;
 
   private BaseUserResponse user;
@@ -58,5 +58,9 @@ public class GistCommentResponse {
         ", updatedAt=" + updatedAt +
         ", body='" + body + '\'' +
         '}';
+  }
+
+  public GistComment toGistComment() {
+    return new GistComment(getId(), getUser().toOwner(), getAuthorAssociation(), getCreatedAt(), getUpdatedAt(), getBody());
   }
 }

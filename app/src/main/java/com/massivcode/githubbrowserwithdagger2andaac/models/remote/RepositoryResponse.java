@@ -1,6 +1,7 @@
-package com.massivcode.githubbrowserwithdagger2andaac.models;
+package com.massivcode.githubbrowserwithdagger2andaac.models.remote;
 
 import com.google.gson.annotations.SerializedName;
+import com.massivcode.githubbrowserwithdagger2andaac.models.local.Repository;
 import java.util.Date;
 
 /**
@@ -8,6 +9,7 @@ import java.util.Date;
  */
 
 public class RepositoryResponse {
+
   private long id;
 
   private String name;
@@ -156,5 +158,12 @@ public class RepositoryResponse {
         ", openIssueCounts=" + openIssueCounts +
         ", license='" + license + '\'' +
         '}';
+  }
+
+  public Repository toRepository() {
+    return new Repository(getId(), getName(), getFullName(), getOwner().toOwner(), isPrivate(),
+        getHtmlUrl(), getDescription(), isFork(), getCreatedAt(), getUpdatedAt(),
+        getPushedAt(), getHomepage(), getSize(), getStarCounts(), getWatcherCounts(), getLanguage(),
+        getFolkCounts(), getOpenIssueCounts(), getLicense());
   }
 }

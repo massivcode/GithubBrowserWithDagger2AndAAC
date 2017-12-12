@@ -1,6 +1,7 @@
-package com.massivcode.githubbrowserwithdagger2andaac.models;
+package com.massivcode.githubbrowserwithdagger2andaac.models.remote;
 
 import com.google.gson.annotations.SerializedName;
+import com.massivcode.githubbrowserwithdagger2andaac.models.local.GistFile;
 
 /**
  * Created by massivcode@gmail.com on 2017-12-11.
@@ -44,5 +45,9 @@ public class GistFileResponse {
         ", rawUrl='" + rawUrl + '\'' +
         ", size=" + size +
         '}';
+  }
+
+  public GistFile toGistFile(String gistId) {
+    return new GistFile(gistId, getFileName(), getType(), getLanguage(), getRawUrl(), getSize());
   }
 }

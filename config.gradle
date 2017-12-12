@@ -11,9 +11,10 @@ ext {
     // libraries
     supportLibraryVersion = '27.0.2'
     retrofitVersion = '2.3.0'
+    okHttpVersion = '3.9.1'
     aacVersion = '1.0.0'
     glideVersion = '4.4.0'
     realmVersion = '4.3.1'
-    daggerVersion = '2.13'
+//    daggerVersion = '2.13'
     butterKnifeVersion = '8.8.1'
 }
