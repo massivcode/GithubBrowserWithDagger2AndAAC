@@ -22,11 +22,14 @@ import com.massivcode.githubbrowserwithdagger2andaac.base.BaseActivity;
 import com.massivcode.githubbrowserwithdagger2andaac.models.local.User;
 import com.massivcode.githubbrowserwithdagger2andaac.repositories.Resource;
 import com.massivcode.githubbrowserwithdagger2andaac.repositories.Status;
+import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.overview.OverviewFragment;
+import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.overview.OverviewMenuItem;
 import com.massivcode.githubbrowserwithdagger2andaac.utils.images.ImageLoader;
 
 @SuppressWarnings("ConstantConditions")
 public class MainActivity extends BaseActivity
-    implements NavigationView.OnNavigationItemSelectedListener {
+    implements NavigationView.OnNavigationItemSelectedListener,
+    OverviewFragment.ActivityInteractor {
 
   @BindView(R.id.toolbar)
   Toolbar mToolbar;
@@ -98,9 +101,11 @@ public class MainActivity extends BaseActivity
         mLoginNameTextView.setText(user.getLoginName());
         mLinkTextView
             .setText(TextUtils.isEmpty(user.getEmail()) ? user.getBlog() : user.getEmail());
-        ImageLoader.loadImage(mProfileImageView, user.getAvatarUrl());
+        ImageLoader.loadImageAsCircleTransform(mProfileImageView, user.getAvatarUrl());
       }
     });
+
+    addFragment(R.id.fragmentContainer, OverviewFragment.newInstance(mLoginName));
   }
 
   @Override
@@ -108,7 +113,11 @@ public class MainActivity extends BaseActivity
     if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
       mDrawerLayout.closeDrawer(GravityCompat.START);
     } else {
-      super.onBackPressed();
+      if (isBackStackEmpty()) {
+        finish();
+      } else {
+        super.onBackPressed();
+      }
     }
   }
 
@@ -151,5 +160,19 @@ public class MainActivity extends BaseActivity
 
     mDrawerLayout.closeDrawer(GravityCompat.START);
     return true;
+  }
+
+  @Override
+  public void onOverviewMenuItemClicked(OverviewFragment fragment, OverviewMenuItem item) {
+    switch (item.getIconId()) {
+      case R.drawable.ic_repository:
+        break;
+      case R.drawable.ic_gists:
+        break;
+      case R.drawable.ic_followers:
+        break;
+      case R.drawable.ic_following:
+        break;
+    }
   }
 }

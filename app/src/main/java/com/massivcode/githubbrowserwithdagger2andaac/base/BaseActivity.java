@@ -39,6 +39,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         .commit();
   }
 
+  protected Fragment getFragment(Class targetClass) {
+    String tag = targetClass.getSimpleName();
+
+    FragmentManager fragmentManager = getSupportFragmentManager();
+    return fragmentManager.findFragmentByTag(tag);
+  }
+
   protected Fragment getCurrentFragment() {
     FragmentManager fragmentManager = getSupportFragmentManager();
 

@@ -95,6 +95,7 @@ public class UserResponse extends BaseUserResponse {
         ", following=" + following +
         ", createdAt=" + createdAt +
         ", updatedAt=" + updatedAt +
+        ", loginName=" + getLoginName() +
         '}';
   }
 

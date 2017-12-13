@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@android:color/white">
+
+  <android.support.v7.widget.CardView
+    android:id="@+id/cv"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:padding="16dp"
+      android:orientation="vertical">
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+          android:id="@+id/profileIv"
+          android:layout_width="56dp"
+          android:layout_height="56dp"
+          tools:srcCompat="@drawable/ic_following" />
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="16dp"
+          android:orientation="vertical">
+
+          <TextView
+            android:id="@+id/userNameTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/roboto_medium"
+            tools:text="userName" />
+
+          <TextView
+            android:id="@+id/loginNameTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_light"
+            tools:text="loginName" />
+
+        </LinearLayout>
+
+      </LinearLayout>
+
+      <TextView
+        android:id="@+id/locationTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawablePadding="4dp"
+        android:drawableStart="@drawable/ic_location"
+        android:fontFamily="@font/roboto"
+        android:gravity="center_vertical"
+        tools:text="YongIn, South Korea" />
+
+      <TextView
+        android:id="@+id/emailTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autoLink="email"
+        android:drawablePadding="4dp"
+        android:drawableStart="@drawable/ic_email"
+        android:fontFamily="@font/roboto"
+        android:gravity="center_vertical"
+        tools:text="massivcode@gmail.com" />
+
+      <TextView
+        android:id="@+id/homepageTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autoLink="web"
+        android:drawablePadding="4dp"
+        android:drawableStart="@drawable/ic_link"
+        android:fontFamily="@font/roboto"
+        android:gravity="center_vertical"
+        tools:text="http://massivcode.com" />
+
+    </LinearLayout>
+
+  </android.support.v7.widget.CardView>
+
+  <android.support.v7.widget.RecyclerView
+    android:id="@+id/menuRv"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="4dp"
+    android:layout_below="@id/cv"
+    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+    tools:listitem="@layout/item_overview_menu" />
+
+  <ProgressBar
+    android:id="@+id/progressBar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="148dp"
+    android:visibility="gone"
+    tools:visibility="visible" />
+
+</RelativeLayout>

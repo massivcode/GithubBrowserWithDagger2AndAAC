@@ -63,7 +63,7 @@ public class UserRepository {
           public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
             if (response.isSuccessful()) {
               UserResponse userResponse = response.body();
-
+              System.out.println(userResponse);
               if (userResponse == null) {
                 liveData.setValue(null);
               } else {
