@@ -25,6 +25,7 @@ import com.massivcode.githubbrowserwithdagger2andaac.repositories.Status;
 import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.overview.OverviewFragment;
 import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.overview.OverviewMenuItem;
 import com.massivcode.githubbrowserwithdagger2andaac.utils.images.ImageLoader;
+import com.massivcode.githubbrowserwithdagger2andaac.utils.log.DLogger;
 
 @SuppressWarnings("ConstantConditions")
 public class MainActivity extends BaseActivity
@@ -151,11 +152,13 @@ public class MainActivity extends BaseActivity
 
     if (id == R.id.nav_repository) {
       // Handle the camera action
+      DLogger.d("repo");
     } else if (id == R.id.nav_gists) {
-
+      DLogger.d("gists");
     } else if (id == R.id.nav_followers) {
-
+      DLogger.d("followers");
     } else if (id == R.id.nav_following) {
+      DLogger.d("following");
     }
 
     mDrawerLayout.closeDrawer(GravityCompat.START);
@@ -166,13 +169,23 @@ public class MainActivity extends BaseActivity
   public void onOverviewMenuItemClicked(OverviewFragment fragment, OverviewMenuItem item) {
     switch (item.getIconId()) {
       case R.drawable.ic_repository:
+        onNavigationItemSelected(getMenuItem(0));
         break;
       case R.drawable.ic_gists:
+        onNavigationItemSelected(getMenuItem(1));
         break;
       case R.drawable.ic_followers:
+        onNavigationItemSelected(getMenuItem(2));
         break;
       case R.drawable.ic_following:
+        onNavigationItemSelected(getMenuItem(3));
         break;
     }
+  }
+
+  private MenuItem getMenuItem(int position) {
+    MenuItem menuItem = mNavigationView.getMenu().getItem(position);
+    menuItem.setChecked(true);
+    return menuItem;
   }
 }
