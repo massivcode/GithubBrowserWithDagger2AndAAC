@@ -6,4 +6,8 @@
   <string name="navigation_drawer_close">Close navigation drawer</string>
 
   <string name="action_settings">Settings</string>
+  <string name="nav_repositories">Repositories</string>
+  <string name="nav_gists">Gists</string>
+  <string name="nav_followers">Followers</string>
+  <string name="nav_followings">Followings</string>
 </resources>

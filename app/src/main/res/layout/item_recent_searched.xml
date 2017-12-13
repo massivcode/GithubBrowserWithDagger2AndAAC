@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:padding="4dp"
+  android:orientation="vertical">
+
+  <TextView
+    android:id="@+id/keywordTv"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:ellipsize="end"
+    android:fontFamily="@font/roboto"
+    android:maxLines="1"
+    android:textColor="@android:color/black"
+    tools:text="loginName" />
+
+  <TextView
+    android:id="@+id/searchedAtTv"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="4dp"
+    android:ellipsize="end"
+    android:fontFamily="@font/roboto_light"
+    android:gravity="end"
+    android:maxLines="1"
+    tools:text="2017.12.13" />
+
+</LinearLayout>
