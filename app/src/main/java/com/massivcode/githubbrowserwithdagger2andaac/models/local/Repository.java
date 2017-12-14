@@ -46,7 +46,7 @@ public class Repository extends RealmObject {
 
   private int openIssueCounts;
 
-  private String license;
+  private License license;
 
   public Repository() {
   }
@@ -55,7 +55,7 @@ public class Repository extends RealmObject {
       Owner owner, boolean isPrivate, String htmlUrl, String description, boolean isFork,
       Date createdAt, Date updatedAt, Date pushedAt, String homepage, long size, int starCounts,
       int watcherCounts, String language, int folkCounts, int openIssueCounts,
-      String license) {
+      License license) {
     this.id = id;
     this.name = name;
     this.fullName = fullName;
@@ -221,11 +221,11 @@ public class Repository extends RealmObject {
     this.openIssueCounts = openIssueCounts;
   }
 
-  public String getLicense() {
+  public License getLicense() {
     return license;
   }
 
-  public void setLicense(String license) {
+  public void setLicense(License license) {
     this.license = license;
   }
 

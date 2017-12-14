@@ -24,6 +24,7 @@ import com.massivcode.githubbrowserwithdagger2andaac.repositories.Resource;
 import com.massivcode.githubbrowserwithdagger2andaac.repositories.Status;
 import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.overview.OverviewFragment;
 import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.overview.OverviewMenuItem;
+import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.repository.RepositoriesFragment;
 import com.massivcode.githubbrowserwithdagger2andaac.utils.images.ImageLoader;
 import com.massivcode.githubbrowserwithdagger2andaac.utils.log.DLogger;
 
@@ -52,6 +53,7 @@ public class MainActivity extends BaseActivity
 
   private String mLoginName;
   private MainViewModel mViewModel;
+  private String mClickedLoginName;
 
   @Override
   public int setLayoutId() {
@@ -115,9 +117,8 @@ public class MainActivity extends BaseActivity
       mDrawerLayout.closeDrawer(GravityCompat.START);
     } else {
       if (isBackStackEmpty()) {
+        DLogger.i("isBackStackEmpty-> finish");
         finish();
-      } else {
-        super.onBackPressed();
       }
     }
   }
@@ -147,12 +148,12 @@ public class MainActivity extends BaseActivity
   @SuppressWarnings("StatementWithEmptyBody")
   @Override
   public boolean onNavigationItemSelected(MenuItem item) {
-    // Handle navigation view item clicks here.
+    String loginName = TextUtils.isEmpty(mClickedLoginName) ? mLoginName : mClickedLoginName;
+
     int id = item.getItemId();
 
     if (id == R.id.nav_repository) {
-      // Handle the camera action
-      DLogger.d("repo");
+      addFragment(R.id.fragmentContainer, RepositoriesFragment.newInstance(loginName));
     } else if (id == R.id.nav_gists) {
       DLogger.d("gists");
     } else if (id == R.id.nav_followers) {
@@ -166,7 +167,9 @@ public class MainActivity extends BaseActivity
   }
 
   @Override
-  public void onOverviewMenuItemClicked(OverviewFragment fragment, OverviewMenuItem item) {
+  public void onOverviewMenuItemClicked(OverviewFragment fragment, OverviewMenuItem item, String loginName) {
+    mClickedLoginName = loginName;
+
     switch (item.getIconId()) {
       case R.drawable.ic_repository:
         onNavigationItemSelected(getMenuItem(0));

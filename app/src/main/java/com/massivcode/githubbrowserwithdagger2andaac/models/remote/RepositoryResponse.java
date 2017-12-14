@@ -1,5 +1,6 @@
 package com.massivcode.githubbrowserwithdagger2andaac.models.remote;
 
+import android.support.annotation.NonNull;
 import com.google.gson.annotations.SerializedName;
 import com.massivcode.githubbrowserwithdagger2andaac.models.local.Repository;
 import java.util.Date;
@@ -8,7 +9,7 @@ import java.util.Date;
  * Created by massivcode@gmail.com on 2017-12-11.
  */
 
-public class RepositoryResponse {
+public class RepositoryResponse implements Comparable<RepositoryResponse> {
 
   private long id;
 
@@ -57,7 +58,7 @@ public class RepositoryResponse {
   @SerializedName("open_issues_count")
   private int openIssueCounts;
 
-  private String license;
+  private LicenseResponse license;
 
   public long getId() {
     return id;
@@ -131,7 +132,7 @@ public class RepositoryResponse {
     return openIssueCounts;
   }
 
-  public String getLicense() {
+  public LicenseResponse getLicense() {
     return license;
   }
 
@@ -164,6 +165,22 @@ public class RepositoryResponse {
     return new Repository(getId(), getName(), getFullName(), getOwner().toOwner(), isPrivate(),
         getHtmlUrl(), getDescription(), isFork(), getCreatedAt(), getUpdatedAt(),
         getPushedAt(), getHomepage(), getSize(), getStarCounts(), getWatcherCounts(), getLanguage(),
-        getFolkCounts(), getOpenIssueCounts(), getLicense());
+        getFolkCounts(), getOpenIssueCounts(),
+        getLicense() == null ? null : getLicense().toLicense());
+  }
+
+  @Override
+  public int compareTo(@NonNull RepositoryResponse repositoryResponse) {
+    Date targetUpdatedAt = repositoryResponse.updatedAt;
+
+    if (updatedAt.equals(targetUpdatedAt)) {
+      return 0;
+    }
+
+    if (updatedAt.after(targetUpdatedAt)) {
+      return -1;
+    } else {
+      return 1;
+    }
   }
 }

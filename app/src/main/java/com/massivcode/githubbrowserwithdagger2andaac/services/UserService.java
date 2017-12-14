@@ -8,12 +8,14 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by massivcode@gmail.com on 2017-12-11.
  */
 
 public interface UserService {
+
   @GET("users/{loginName}")
   Call<UserResponse> fetchUser(@Path("loginName") String userLoginName);
 
@@ -21,7 +23,9 @@ public interface UserService {
   Call<List<BaseUserResponse>> fetchFollowers(@Path("loginName") String userLoginName);
 
   @GET("users/{loginName}/repos")
-  Call<List<RepositoryResponse>> fetchRepositories(@Path("loginName") String userLoginName);
+  Call<List<RepositoryResponse>> fetchRepositories(
+      @Path("loginName") String userLoginName,
+      @Query("page") int page);
 
   @GET("users/{loginName}/followers")
   Call<List<BaseUserResponse>> fetchFollowing(@Path("loginName") String userLoginName);

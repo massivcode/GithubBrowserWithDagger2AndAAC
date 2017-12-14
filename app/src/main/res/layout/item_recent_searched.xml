@@ -14,7 +14,7 @@
     android:fontFamily="@font/roboto"
     android:maxLines="1"
     android:textColor="@android:color/black"
-    tools:text="loginName" />
+    tools:text="mLoginName" />
 
   <TextView
     android:id="@+id/searchedAtTv"

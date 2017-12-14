@@ -30,7 +30,7 @@ public class OverviewFragment extends BaseFragment {
 
   public interface ActivityInteractor {
 
-    void onOverviewMenuItemClicked(OverviewFragment fragment, OverviewMenuItem item);
+    void onOverviewMenuItemClicked(OverviewFragment fragment, OverviewMenuItem item, String loginName);
   }
 
   @BindView(R.id.profileIv)
@@ -156,7 +156,7 @@ public class OverviewFragment extends BaseFragment {
       OverviewMenuItem item = (OverviewMenuItem) view.getTag();
 
       if (mInteractor != null) {
-        mInteractor.onOverviewMenuItemClicked(OverviewFragment.this, item);
+        mInteractor.onOverviewMenuItemClicked(OverviewFragment.this, item, mLoginName);
       }
     }
   };

@@ -10,4 +10,8 @@
   <string name="nav_gists">Gists</string>
   <string name="nav_followers">Followers</string>
   <string name="nav_followings">Followings</string>
+  <string name="hint_search_repositories">Search repositories\.\.\.</string>
+  <string name="filter_results_msg_format">{C} results for repositories matching {K}</string>
+  <string name="search_results_empty_msg_format">{L} doesn\'t have any repositories that match.</string>
+  <string name="clear_filter">Clear filter</string>
 </resources>

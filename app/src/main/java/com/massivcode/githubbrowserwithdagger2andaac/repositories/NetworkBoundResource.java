@@ -6,14 +6,13 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Observer;
 import android.support.annotation.Nullable;
 import com.massivcode.githubbrowserwithdagger2andaac.utils.log.DLogger;
-import io.realm.RealmObject;
 
 /**
  * Created by massivcode@gmail.com on 2017-12-12.
  *
  * https://developer.android.com/topic/libraries/architecture/guide.html#addendum
  */
-public abstract class NetworkBoundResource<LocalResultType extends RealmObject> {
+public abstract class NetworkBoundResource<LocalResultType> {
 
   private final MediatorLiveData<Resource<LocalResultType>> mResult = new MediatorLiveData<>();
 
