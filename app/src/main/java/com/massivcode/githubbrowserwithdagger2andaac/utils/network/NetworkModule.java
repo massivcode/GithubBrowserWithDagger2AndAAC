@@ -3,6 +3,7 @@ package com.massivcode.githubbrowserwithdagger2andaac.utils.network;
 import android.app.Application;
 import com.massivcode.githubbrowserwithdagger2andaac.BuildConfig;
 import com.massivcode.githubbrowserwithdagger2andaac.services.GistService;
+import com.massivcode.githubbrowserwithdagger2andaac.services.RawContentService;
 import com.massivcode.githubbrowserwithdagger2andaac.services.RepoService;
 import com.massivcode.githubbrowserwithdagger2andaac.services.UserService;
 import java.util.concurrent.TimeUnit;
@@ -22,6 +23,7 @@ public class NetworkModule {
   private UserService mUserService;
   private RepoService mRepoService;
   private GistService mGistService;
+  private RawContentService mRawContentService;
   private NetworkUtil mNetworkUtil;
 
   private NetworkModule(Application application) {
@@ -30,6 +32,7 @@ public class NetworkModule {
     mUserService = createUserService();
     mRepoService = createRepoService();
     mGistService= createGistService();
+    mRawContentService = createRawContentService();
     mNetworkUtil = createNetworkUtil(application);
   }
 
@@ -70,6 +73,14 @@ public class NetworkModule {
         .build();
   }
 
+  private Retrofit createRetrofit(OkHttpClient okHttpClient, String serverUrl) {
+    return new Retrofit.Builder()
+        .addConverterFactory(new ToStringConverterFactory())
+        .baseUrl(serverUrl)
+        .client(okHttpClient)
+        .build();
+  }
+
 
   private UserService createUserService() {
     return mRetrofit.create(UserService.class);
@@ -81,6 +92,10 @@ public class NetworkModule {
 
   private GistService createGistService() {
     return mRetrofit.create(GistService.class);
+  }
+
+  private RawContentService createRawContentService() {
+    return createRetrofit(mOkHttpClient, RawContentService.SERVER_URL).create(RawContentService.class);
   }
 
   private NetworkUtil createNetworkUtil(Application application) {
@@ -99,6 +114,9 @@ public class NetworkModule {
     return mGistService;
   }
 
+  public RawContentService provideRawContentService() {
+    return mRawContentService;
+  }
 
   public OkHttpClient provideOkHttpClient() {
     return mOkHttpClient;

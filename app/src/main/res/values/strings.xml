@@ -14,4 +14,12 @@
   <string name="filter_results_msg_format">{C} results for repositories matching {K}</string>
   <string name="search_results_empty_msg_format">{L} doesn\'t have any repositories that match.</string>
   <string name="clear_filter">Clear filter</string>
+  <string name="viewCode">View code</string>
+  <string name="jumpToFile">Jump to file</string>
+  <string name="starCountsFormat">Star {C}</string>
+  <string name="watcherCountsFormat">Watcher {C}</string>
+  <string name="forkCountsFormat">Fork {C}</string>
+  <string name="createdAtFormat">Created at {D}</string>
+  <string name="updatedAtFormat">Updated at {D}</string>
+  <string name="pushedAtForamt">Pushed at {D}</string>
 </resources>

@@ -22,16 +22,24 @@ public class RepositoryDao extends BaseDao<Repository> {
   public MutableLiveData<List<Repository>> findAllRepositories(String loginName) {
     RealmResults<Repository> searchResults =
         mRealm
-        .where(Repository.class)
-        .equalTo("owner.loginName", loginName)
-        .sort("updatedAt", Sort.DESCENDING)
-        .findAll();
+            .where(Repository.class)
+            .equalTo("owner.loginName", loginName)
+            .sort("updatedAt", Sort.DESCENDING)
+            .findAll();
 
     List<Repository> repositoryList = new ArrayList<>(searchResults);
     MutableLiveData<List<Repository>> mutableLiveData = new MutableLiveData<>();
     mutableLiveData.setValue(repositoryList);
 
     return mutableLiveData;
+  }
+
+  public Repository findRepository(String loginName, long id) {
+    return mRealm
+        .where(Repository.class)
+        .equalTo("owner.loginName", loginName)
+        .equalTo("id", id)
+        .findFirst();
   }
 
 

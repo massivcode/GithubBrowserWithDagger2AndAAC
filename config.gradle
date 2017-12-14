@@ -17,4 +17,5 @@ ext {
     realmVersion = '4.3.1'
 //    daggerVersion = '2.13'
     butterKnifeVersion = '8.8.1'
+    markdownViewAndroidVersion = '1.0.4'
 }

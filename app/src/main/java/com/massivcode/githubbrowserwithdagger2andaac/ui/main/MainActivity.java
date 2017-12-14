@@ -27,6 +27,7 @@ import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.friends.F
 import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.overview.OverviewFragment;
 import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.overview.OverviewMenuItem;
 import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.repository.RepositoriesFragment;
+import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.repository.detail.RepositoryDetailFragment;
 import com.massivcode.githubbrowserwithdagger2andaac.utils.images.ImageLoader;
 import com.massivcode.githubbrowserwithdagger2andaac.utils.log.DLogger;
 
@@ -34,7 +35,7 @@ import com.massivcode.githubbrowserwithdagger2andaac.utils.log.DLogger;
 public class MainActivity extends BaseActivity
     implements NavigationView.OnNavigationItemSelectedListener,
     OverviewFragment.ActivityInteractor, RepositoriesFragment.ActivityInteractor,
-    FriendsFragment.ActivityInteractor {
+    FriendsFragment.ActivityInteractor, RepositoryDetailFragment.ActivityInteractor {
 
   @BindView(R.id.toolbar)
   Toolbar mToolbar;
@@ -199,11 +200,18 @@ public class MainActivity extends BaseActivity
   @Override
   public void onRepositoryItemClick(RepositoriesFragment fragment, Repository item,
       String loginName) {
+    addFragment(R.id.fragmentContainer, RepositoryDetailFragment.newInstance(loginName, item.getId()));
   }
 
   @Override
   public void onFriendItemClick(FriendsFragment fragment, String loginName) {
     startActivity(new Intent(MainActivity.this, MainActivity.class)
         .putExtra("loginName", loginName));
+  }
+
+  @Override
+  public void onViewCodeClick(RepositoryDetailFragment fragment, String loginName,
+      String repositoryName) {
+
   }
 }

@@ -19,11 +19,6 @@ public interface RepoService {
       @Path("path") String path
   );
 
-  @GET("repos/{loginName}/{repositoryName}/master/{fileName}")
-  Call<String> fetchContent(
-      @Path("loginName") String loginName,
-      @Path("repositoryName") String repositoryName,
-      @Path("fileName") String fileName
-  );
+
 
 }
