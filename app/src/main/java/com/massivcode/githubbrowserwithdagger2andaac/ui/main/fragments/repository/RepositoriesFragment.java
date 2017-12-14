@@ -2,6 +2,7 @@ package com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.reposito
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -38,6 +39,10 @@ import java.util.List;
 
 public class RepositoriesFragment extends BaseFragment {
 
+  public interface ActivityInteractor {
+    void onRepositoryItemClick(RepositoriesFragment fragment, Repository item, String loginName);
+  }
+
   @BindView(R.id.searchAcet)
   AppCompatEditText mSearchEditText;
 
@@ -66,6 +71,7 @@ public class RepositoriesFragment extends BaseFragment {
   private String mLoginName;
   private RepositoriesViewModel mViewModel;
   private RepositoryAdapter mRepositoryAdapter;
+  private ActivityInteractor mActivityInteractor;
 
   public static RepositoriesFragment newInstance(String loginName) {
     RepositoriesFragment fragment = new RepositoriesFragment();
@@ -86,6 +92,12 @@ public class RepositoriesFragment extends BaseFragment {
     if (args != null) {
       mLoginName = args.getString("loginName");
     }
+  }
+
+  @Override
+  public void onAttach(Context context) {
+    super.onAttach(context);
+    mActivityInteractor = (ActivityInteractor) context;
   }
 
   @Override
@@ -153,6 +165,10 @@ public class RepositoriesFragment extends BaseFragment {
     @Override
     public void onClick(View view) {
       Repository item = (Repository) view.getTag();
+
+      if (mActivityInteractor != null) {
+        mActivityInteractor.onRepositoryItemClick(RepositoriesFragment.this, item, mLoginName);
+      }
     }
   };
 

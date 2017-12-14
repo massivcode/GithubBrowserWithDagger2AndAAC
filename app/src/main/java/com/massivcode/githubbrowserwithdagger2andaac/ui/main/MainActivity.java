@@ -19,9 +19,11 @@ import android.widget.TextView;
 import butterknife.BindView;
 import com.massivcode.githubbrowserwithdagger2andaac.R;
 import com.massivcode.githubbrowserwithdagger2andaac.base.BaseActivity;
+import com.massivcode.githubbrowserwithdagger2andaac.models.local.Repository;
 import com.massivcode.githubbrowserwithdagger2andaac.models.local.User;
 import com.massivcode.githubbrowserwithdagger2andaac.repositories.Resource;
 import com.massivcode.githubbrowserwithdagger2andaac.repositories.Status;
+import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.friends.FriendsFragment;
 import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.overview.OverviewFragment;
 import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.overview.OverviewMenuItem;
 import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.repository.RepositoriesFragment;
@@ -31,7 +33,8 @@ import com.massivcode.githubbrowserwithdagger2andaac.utils.log.DLogger;
 @SuppressWarnings("ConstantConditions")
 public class MainActivity extends BaseActivity
     implements NavigationView.OnNavigationItemSelectedListener,
-    OverviewFragment.ActivityInteractor {
+    OverviewFragment.ActivityInteractor, RepositoriesFragment.ActivityInteractor,
+    FriendsFragment.ActivityInteractor {
 
   @BindView(R.id.toolbar)
   Toolbar mToolbar;
@@ -157,9 +160,9 @@ public class MainActivity extends BaseActivity
     } else if (id == R.id.nav_gists) {
       DLogger.d("gists");
     } else if (id == R.id.nav_followers) {
-      DLogger.d("followers");
+      addFragment(R.id.fragmentContainer, FriendsFragment.newInstance(loginName, true));
     } else if (id == R.id.nav_following) {
-      DLogger.d("following");
+      addFragment(R.id.fragmentContainer, FriendsFragment.newInstance(loginName, false));
     }
 
     mDrawerLayout.closeDrawer(GravityCompat.START);
@@ -167,7 +170,8 @@ public class MainActivity extends BaseActivity
   }
 
   @Override
-  public void onOverviewMenuItemClicked(OverviewFragment fragment, OverviewMenuItem item, String loginName) {
+  public void onOverviewMenuItemClicked(OverviewFragment fragment, OverviewMenuItem item,
+      String loginName) {
     mClickedLoginName = loginName;
 
     switch (item.getIconId()) {
@@ -190,5 +194,16 @@ public class MainActivity extends BaseActivity
     MenuItem menuItem = mNavigationView.getMenu().getItem(position);
     menuItem.setChecked(true);
     return menuItem;
+  }
+
+  @Override
+  public void onRepositoryItemClick(RepositoriesFragment fragment, Repository item,
+      String loginName) {
+  }
+
+  @Override
+  public void onFriendItemClick(FriendsFragment fragment, String loginName) {
+    startActivity(new Intent(MainActivity.this, MainActivity.class)
+        .putExtra("loginName", loginName));
   }
 }

@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import com.massivcode.githubbrowserwithdagger2andaac.models.local.Repository;
 import com.massivcode.githubbrowserwithdagger2andaac.models.local.User;
+import com.massivcode.githubbrowserwithdagger2andaac.utils.log.DLogger;
 import com.massivcode.githubbrowserwithdagger2andaac.utils.realm.BaseDao;
 import io.realm.Realm;
 import io.realm.RealmList;
@@ -20,6 +21,11 @@ public class UserDao extends BaseDao<User> {
   }
 
   public void add(User user) {
+    if (mRealm.where(User.class).equalTo("loginName", user.getLoginName()).findFirst() != null) {
+      DLogger.i("already exists return");
+      return;
+    }
+
     mRealm.beginTransaction();
     mRealm.copyToRealm(user);
     mRealm.commitTransaction();

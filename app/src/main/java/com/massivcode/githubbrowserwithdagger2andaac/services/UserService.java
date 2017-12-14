@@ -20,15 +20,19 @@ public interface UserService {
   Call<UserResponse> fetchUser(@Path("loginName") String userLoginName);
 
   @GET("users/{loginName}/followers")
-  Call<List<BaseUserResponse>> fetchFollowers(@Path("loginName") String userLoginName);
+  Call<List<BaseUserResponse>> fetchFollowers(
+      @Path("loginName") String userLoginName,
+      @Query("page") int page);
 
   @GET("users/{loginName}/repos")
   Call<List<RepositoryResponse>> fetchRepositories(
       @Path("loginName") String userLoginName,
       @Query("page") int page);
 
-  @GET("users/{loginName}/followers")
-  Call<List<BaseUserResponse>> fetchFollowing(@Path("loginName") String userLoginName);
+  @GET("users/{loginName}/following")
+  Call<List<BaseUserResponse>> fetchFollowing(
+      @Path("loginName") String userLoginName,
+      @Query("page") int page);
 
   @GET("users/{loginName}/gists")
   Call<List<GistResponse>> fetchGists(@Path("loginName") String userLoginName);

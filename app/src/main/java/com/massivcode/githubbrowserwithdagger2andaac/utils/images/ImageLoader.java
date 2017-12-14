@@ -27,4 +27,10 @@ public class ImageLoader {
         .apply(RequestOptions.circleCropTransform())
         .into(targetImageView);
   }
+
+  public static void clear(ImageView targetImageView) {
+    GlideApp
+        .with(targetImageView.getContext().getApplicationContext())
+        .clear(targetImageView);
+  }
 }
