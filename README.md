@@ -17,6 +17,7 @@
 * Android Architecture Components (Lifecycle Extensions)
 * OkHttp
 * Gson
+* [github-colors](https://github.com/ozh/github-colors) : Github 에서 사용되는 언어색상 에셋
 
 ## 2. 지원기능
 

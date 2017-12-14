@@ -1,6 +1,7 @@
 package com.massivcode.githubbrowserwithdagger2andaac;
 
 import android.app.Application;
+import com.massivcode.githubbrowserwithdagger2andaac.utils.colors.GithubLanguageColorMapper;
 import com.massivcode.githubbrowserwithdagger2andaac.utils.log.DLogger;
 import com.massivcode.githubbrowserwithdagger2andaac.utils.network.NetworkModule;
 import io.realm.Realm;
@@ -36,6 +37,8 @@ public class GithubBrowserApp extends Application  {
   private void initUtils() {
     DLogger.init(getApplicationContext());
     NetworkModule.init(this);
+
+    boolean initSuccessful = GithubLanguageColorMapper.init(this);
   }
 
 
