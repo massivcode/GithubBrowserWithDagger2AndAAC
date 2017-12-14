@@ -9,15 +9,15 @@
 
 ### 사용 라이브러리
 
-* Retrofit2
-* ButterKnife
-* Dagger2
-* Realm
-* Glide
-* Android Architecture Components (Lifecycle Extensions)
-* OkHttp
-* Gson
+* [Retrofit2](https://github.com/square/retrofit) : 통신 관련 라이브러리.
+* [ButterKnife](https://github.com/JakeWharton/butterknife) : View DI 라이브러리.
+* [Dagger2](https://github.com/google/dagger) : DI 라이브러리.
+* [Realm Java](https://github.com/realm/realm-java) : 모바일 DB 라이브러리.
+* [Glide](https://github.com/bumptech/glide) : 비동기 이미지 로더.
+* [Android Architecture Components (Lifecycle Extensions)]()
+* [OkHttp Logging Interceptor](https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor) : 통신 디버그 로거
 * [github-colors](https://github.com/ozh/github-colors) : Github 에서 사용되는 언어색상 에셋
+* [MarkdownView-Android](https://github.com/mukeshsolanki/MarkdownView-Android) : 마크다운 뷰
 
 ## 2. 지원기능
 
