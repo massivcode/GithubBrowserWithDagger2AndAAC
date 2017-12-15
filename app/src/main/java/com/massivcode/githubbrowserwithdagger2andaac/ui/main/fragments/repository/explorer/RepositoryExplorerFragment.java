@@ -10,7 +10,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import butterknife.BindView;
 import com.massivcode.githubbrowserwithdagger2andaac.R;
@@ -35,9 +34,6 @@ public class RepositoryExplorerFragment extends BaseFragment {
 
   @BindView(R.id.repositoryPathRv)
   RecyclerView mRepositoryPathRecyclerView;
-
-  @BindView(R.id.previousPathContainer)
-  LinearLayout mPreviousPathContainer;
 
   @BindView(R.id.currentFilesRv)
   RecyclerView mRepositoryContentsRecyclerView;
