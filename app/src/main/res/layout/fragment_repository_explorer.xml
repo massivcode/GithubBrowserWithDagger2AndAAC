@@ -28,31 +28,6 @@
         android:layout_marginBottom="4dp"
         android:background="#9E9E9E"/>
 
-      <LinearLayout
-        android:id="@+id/previousPathContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="gone"
-        tools:visibility="visible">
-
-        <TextView
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginBottom="4dp"
-          android:padding="8dp"
-          android:fontFamily="@font/roboto_medium"
-          android:text=".."
-          android:textColor="#2196f3"
-          android:textSize="14sp"/>
-
-        <View
-          android:layout_width="match_parent"
-          android:layout_height="0.3dp"
-          android:background="#9E9E9E"/>
-
-      </LinearLayout>
-
       <android.support.v7.widget.RecyclerView
         android:id="@+id/currentFilesRv"
         android:layout_width="match_parent"
