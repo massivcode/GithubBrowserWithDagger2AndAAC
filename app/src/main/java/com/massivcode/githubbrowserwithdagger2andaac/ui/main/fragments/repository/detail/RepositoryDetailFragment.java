@@ -3,6 +3,7 @@ package com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.reposito
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,12 +14,15 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import butterknife.BindString;
 import butterknife.BindView;
+import butterknife.OnClick;
 import com.massivcode.githubbrowserwithdagger2andaac.R;
 import com.massivcode.githubbrowserwithdagger2andaac.base.BaseFragment;
+import com.massivcode.githubbrowserwithdagger2andaac.models.local.License;
 import com.massivcode.githubbrowserwithdagger2andaac.models.local.Repository;
 import com.massivcode.githubbrowserwithdagger2andaac.models.remote.RepositoryContentsResponse;
 import com.massivcode.githubbrowserwithdagger2andaac.repositories.Resource;
 import com.massivcode.githubbrowserwithdagger2andaac.repositories.Status;
+import com.massivcode.githubbrowserwithdagger2andaac.ui.main.MainActivity;
 import com.massivcode.githubbrowserwithdagger2andaac.utils.colors.GithubLanguageColorMapper;
 import com.massivcode.githubbrowserwithdagger2andaac.utils.log.DLogger;
 import com.mukesh.MarkdownView;
@@ -59,6 +63,9 @@ public class RepositoryDetailFragment extends BaseFragment {
   @BindView(R.id.forkCountsTv)
   TextView mForkCountsTextView;
 
+  @BindView(R.id.licenseTv)
+  TextView mLicenseTextView;
+
   @BindView(R.id.createdAtTv)
   TextView mCreatedAtTextView;
 
@@ -91,9 +98,6 @@ public class RepositoryDetailFragment extends BaseFragment {
 
   @BindView(R.id.readmeFileNameTv)
   TextView mReadMeFileNameTextView;
-//
-//  @BindView(R.id.readMeContentsTv)
-//  TextView mReadMeContentsTextView;
 
   @BindView(R.id.markdownView)
   MarkdownView mMarkdownView;
@@ -180,6 +184,7 @@ public class RepositoryDetailFragment extends BaseFragment {
         setCountsTextView(mStarCountsTextView, mStarCountsFormat, repository.getStarCounts());
         setCountsTextView(mWatcherCountsTextView, mWatcherCountsFormat,
             repository.getWatcherCounts());
+        setLicense(repository.getLicense());
         setCountsTextView(mForkCountsTextView, mForkCountsFormat, repository.getFolkCounts());
         setDateTextView(mCreatedAtTextView, mCreatedAtFormat, repository.getCreatedAt());
         setDateTextView(mUpdatedAtTextView, mUpdatedAtFormat, repository.getUpdatedAt());
@@ -217,7 +222,6 @@ public class RepositoryDetailFragment extends BaseFragment {
                           return;
                         }
 
-
                         if (stringResource.status == Status.LOADING) {
                           mProgressBar.setVisibility(View.VISIBLE);
                         } else {
@@ -246,7 +250,34 @@ public class RepositoryDetailFragment extends BaseFragment {
     targetTextView.setText(format.replace("{C}", counts + ""));
   }
 
+  private void setLicense(License license) {
+    String licenseString = "X";
+
+    if (license != null) {
+      licenseString = license.getSpdxId();
+    }
+
+    mLicenseTextView.setText(licenseString);
+  }
+
   private void setDateTextView(TextView targetTextView, String format, Date date) {
     targetTextView.setText(format.replace("{D}", mDateFormat.format(date)));
+  }
+
+  @OnClick(R.id.viewCodeTv)
+  protected void onViewCodeClick(View view) {
+
+  }
+
+  @OnClick(R.id.loginNameTv)
+  protected void onLoginNameClick(View view) {
+    String loginName = mLoginNameTextView.getText().toString();
+
+    if (loginName.equals(mLoginName)) {
+      getActivity().onBackPressed();
+    } else {
+      startActivity(new Intent(getContext(), MainActivity.class)
+          .putExtra("loginName", loginName));
+    }
   }
 }

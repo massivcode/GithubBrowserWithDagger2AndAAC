@@ -87,20 +87,18 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="4dp"
-            android:drawablePadding="4dp"
             android:drawableStart="@drawable/ic_star"
             android:ellipsize="end"
             android:fontFamily="@font/roboto_thin"
             android:gravity="center"
             android:maxLines="1"
+            android:textSize="12sp"
             android:textColor="@android:color/black"
             tools:text="@string/starCountsFormat"/>
 
           <View
             android:layout_width="0.3dp"
             android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
             android:background="#9E9E9E"/>
 
           <TextView
@@ -109,20 +107,18 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="4dp"
-            android:drawablePadding="4dp"
             android:drawableStart="@drawable/ic_watchers"
             android:ellipsize="end"
             android:fontFamily="@font/roboto_thin"
             android:gravity="center"
             android:maxLines="1"
+            android:textSize="12sp"
             android:textColor="@android:color/black"
             tools:text="@string/watcherCountsFormat"/>
 
           <View
             android:layout_width="0.3dp"
             android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
             android:background="#9E9E9E"/>
 
 
@@ -132,14 +128,34 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="4dp"
-            android:drawablePadding="4dp"
             android:drawableStart="@drawable/ic_fork"
             android:ellipsize="end"
             android:fontFamily="@font/roboto_thin"
             android:gravity="center"
             android:maxLines="1"
+            android:textSize="12sp"
             android:textColor="@android:color/black"
             tools:text="@string/forkCountsFormat"/>
+
+          <View
+            android:layout_width="0.3dp"
+            android:layout_height="match_parent"
+            android:background="#9E9E9E"/>
+
+          <TextView
+            android:id="@+id/licenseTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="4dp"
+            android:drawableStart="@drawable/ic_copyright"
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto_thin"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textSize="12sp"
+            android:textColor="@android:color/black"
+            tools:text="MIT"/>
 
 
         </LinearLayout>
