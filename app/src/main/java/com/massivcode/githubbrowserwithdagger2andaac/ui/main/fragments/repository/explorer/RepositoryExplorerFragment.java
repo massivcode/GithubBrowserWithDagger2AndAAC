@@ -1,4 +1,4 @@
-package com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.repository.contents;
+package com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.repository.explorer;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -26,7 +26,7 @@ import java.util.Stack;
  * Created by massivcode@gmail.com on 2017-12-15.
  */
 
-public class RepositoryContentsFragment extends BaseFragment {
+public class RepositoryExplorerFragment extends BaseFragment {
 
   public interface ActivityInteractor {
 
@@ -50,12 +50,12 @@ public class RepositoryContentsFragment extends BaseFragment {
   private ActivityInteractor mActivityInteractor;
 
   private RepositoryPathAdapter mRepositoryPathAdapter;
-  private RepositoryContentsAdapter mRepositoryContentsAdapter;
-  private RepositoryContentsViewModel mViewModel;
+  private RepositoryExplorerAdapter mRepositoryExplorerAdapter;
+  private RepositoryExplorerViewModel mViewModel;
   private boolean mIsRepositoryPathClick = false;
 
-  public static RepositoryContentsFragment newInstance(String loginName, String repositoryName) {
-    RepositoryContentsFragment fragment = new RepositoryContentsFragment();
+  public static RepositoryExplorerFragment newInstance(String loginName, String repositoryName) {
+    RepositoryExplorerFragment fragment = new RepositoryExplorerFragment();
 
     Bundle args = new Bundle();
     args.putString("loginName", loginName);
@@ -85,7 +85,7 @@ public class RepositoryContentsFragment extends BaseFragment {
 
   @Override
   public int setLayoutId() {
-    return R.layout.fragment_repository_contents;
+    return R.layout.fragment_repository_explorer;
   }
 
   @Override
@@ -95,17 +95,17 @@ public class RepositoryContentsFragment extends BaseFragment {
         new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
     mRepositoryPathRecyclerView.setAdapter(mRepositoryPathAdapter);
 
-    mRepositoryContentsAdapter = new RepositoryContentsAdapter(mOnRepositoryContentsClickListener);
+    mRepositoryExplorerAdapter = new RepositoryExplorerAdapter(mOnRepositoryContentsClickListener);
     mRepositoryContentsRecyclerView
         .addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
-    mRepositoryContentsRecyclerView.setAdapter(mRepositoryContentsAdapter);
+    mRepositoryContentsRecyclerView.setAdapter(mRepositoryExplorerAdapter);
   }
 
   @Override
   public void onActivityCreated(@Nullable Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
 
-    mViewModel = ViewModelProviders.of(this).get(RepositoryContentsViewModel.class);
+    mViewModel = ViewModelProviders.of(this).get(RepositoryExplorerViewModel.class);
 
     mViewModel.getPathLiveData().observe(this, new Observer<Stack<String>>() {
       @Override
@@ -140,7 +140,7 @@ public class RepositoryContentsFragment extends BaseFragment {
               return;
             }
 
-            mRepositoryContentsAdapter.onDataChanged(data.peek());
+            mRepositoryExplorerAdapter.onDataChanged(data.peek());
           }
         });
   }

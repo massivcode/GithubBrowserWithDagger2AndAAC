@@ -28,7 +28,7 @@ import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.friends.F
 import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.overview.OverviewFragment;
 import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.overview.OverviewMenuItem;
 import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.repository.RepositoriesFragment;
-import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.repository.contents.RepositoryContentsFragment;
+import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.repository.explorer.RepositoryExplorerFragment;
 import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.repository.detail.RepositoryDetailFragment;
 import com.massivcode.githubbrowserwithdagger2andaac.utils.images.ImageLoader;
 import com.massivcode.githubbrowserwithdagger2andaac.utils.log.DLogger;
@@ -38,7 +38,7 @@ public class MainActivity extends BaseActivity
     implements NavigationView.OnNavigationItemSelectedListener,
     OverviewFragment.ActivityInteractor, RepositoriesFragment.ActivityInteractor,
     FriendsFragment.ActivityInteractor, RepositoryDetailFragment.ActivityInteractor,
-    RepositoryContentsFragment.ActivityInteractor {
+    RepositoryExplorerFragment.ActivityInteractor {
 
   @BindView(R.id.toolbar)
   Toolbar mToolbar;
@@ -130,8 +130,8 @@ public class MainActivity extends BaseActivity
 
       if (currentFragment == null) {
         super.onBackPressed();
-      } else if (currentFragment instanceof RepositoryContentsFragment) {
-        RepositoryContentsFragment fragment = (RepositoryContentsFragment) currentFragment;
+      } else if (currentFragment instanceof RepositoryExplorerFragment) {
+        RepositoryExplorerFragment fragment = (RepositoryExplorerFragment) currentFragment;
 
         if (fragment.getPathStackCount() != 1) {
           fragment.onBackPressed();
@@ -231,7 +231,8 @@ public class MainActivity extends BaseActivity
   @Override
   public void onViewCodeClick(RepositoryDetailFragment fragment, String loginName,
       String repositoryName) {
-    addFragment(R.id.fragmentContainer, RepositoryContentsFragment.newInstance(loginName, repositoryName));
+    addFragment(R.id.fragmentContainer, RepositoryExplorerFragment
+        .newInstance(loginName, repositoryName));
   }
 
   @Override

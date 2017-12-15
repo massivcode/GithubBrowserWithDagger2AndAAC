@@ -1,4 +1,4 @@
-package com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.repository.contents;
+package com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.repository.explorer;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
@@ -6,7 +6,7 @@ import android.arch.lifecycle.ViewModel;
 import com.massivcode.githubbrowserwithdagger2andaac.models.remote.RepositoryContentsResponse;
 import com.massivcode.githubbrowserwithdagger2andaac.repositories.Resource;
 import com.massivcode.githubbrowserwithdagger2andaac.services.RepoService;
-import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.repository.contents.RepositoryContentsFragment.ActivityInteractor;
+import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.repository.explorer.RepositoryExplorerFragment.ActivityInteractor;
 import com.massivcode.githubbrowserwithdagger2andaac.utils.log.DLogger;
 import com.massivcode.githubbrowserwithdagger2andaac.utils.network.NetworkModule;
 import io.realm.Realm;
@@ -20,14 +20,14 @@ import retrofit2.Response;
  * Created by massivcode@gmail.com on 2017-12-15.
  */
 
-public class RepositoryContentsViewModel extends ViewModel {
+public class RepositoryExplorerViewModel extends ViewModel {
 
   private Realm mRealm;
   private RepoService mRepoService;
   private MutableLiveData<Stack<String>> mPathLiveData;
   private MutableLiveData<Resource<Stack<List<RepositoryContentsResponse>>>> mContentsLiveData;
 
-  public RepositoryContentsViewModel() {
+  public RepositoryExplorerViewModel() {
     mRealm = Realm.getDefaultInstance();
 
     NetworkModule networkModule = NetworkModule.getInstance();

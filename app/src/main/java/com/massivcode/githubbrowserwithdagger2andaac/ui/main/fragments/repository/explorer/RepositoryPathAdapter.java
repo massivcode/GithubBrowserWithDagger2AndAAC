@@ -1,4 +1,4 @@
-package com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.repository.contents;
+package com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.repository.explorer;
 
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
@@ -12,7 +12,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.massivcode.githubbrowserwithdagger2andaac.R;
-import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.repository.contents.RepositoryPathAdapter.Holder;
+import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.repository.explorer.RepositoryPathAdapter.Holder;
 import java.util.Stack;
 
 /**

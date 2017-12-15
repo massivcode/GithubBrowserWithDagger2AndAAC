@@ -1,4 +1,4 @@
-package com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.repository.contents;
+package com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.repository.explorer;
 
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
@@ -13,19 +13,19 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.massivcode.githubbrowserwithdagger2andaac.R;
 import com.massivcode.githubbrowserwithdagger2andaac.models.remote.RepositoryContentsResponse;
-import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.repository.contents.RepositoryContentsAdapter.Holder;
+import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.repository.explorer.RepositoryExplorerAdapter.Holder;
 import java.util.List;
 
 /**
  * Created by massivcode@gmail.com on 2017-12-15.
  */
 
-public class RepositoryContentsAdapter extends RecyclerView.Adapter<Holder> {
+public class RepositoryExplorerAdapter extends RecyclerView.Adapter<Holder> {
 
   private List<RepositoryContentsResponse> mData;
   private View.OnClickListener mOnItemClickListener;
 
-  public RepositoryContentsAdapter(OnClickListener mOnItemClickListener) {
+  public RepositoryExplorerAdapter(OnClickListener mOnItemClickListener) {
     this.mOnItemClickListener = mOnItemClickListener;
   }
 
