@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@android:color/white">
+
+  <android.support.v7.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+      <android.support.v7.widget.RecyclerView
+        android:id="@+id/repositoryPathRv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"/>
+
+      <View
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:layout_marginBottom="4dp"
+        android:background="#9E9E9E"/>
+
+      <LinearLayout
+        android:id="@+id/previousPathContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="4dp"
+          android:padding="8dp"
+          android:fontFamily="@font/roboto_medium"
+          android:text=".."
+          android:textColor="#2196f3"
+          android:textSize="14sp"/>
+
+        <View
+          android:layout_width="match_parent"
+          android:layout_height="0.3dp"
+          android:background="#9E9E9E"/>
+
+      </LinearLayout>
+
+      <android.support.v7.widget.RecyclerView
+        android:id="@+id/currentFilesRv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_repository_contents"/>
+
+    </LinearLayout>
+
+    <ProgressBar
+      android:id="@+id/progressBar"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:padding="156dp"
+      android:visibility="gone"
+      tools:visibility="visible"/>
+
+
+  </android.support.v7.widget.CardView>
+
+
+</RelativeLayout>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:padding="8dp"
+  android:gravity="center_vertical"
+  android:orientation="horizontal">
+
+  <TextView
+    android:id="@+id/fileInfoTv"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:drawablePadding="4dp"
+    android:fontFamily="@font/roboto_light"
+    android:gravity="center_vertical"
+    android:textColor="#2196f3"
+    android:textSize="14sp"
+    tools:drawableStart="@drawable/ic_folder"
+    tools:text=".gitignore"/>
+
+  <TextView
+    android:id="@+id/fileSizeTv"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:fontFamily="@font/roboto_light"
+    android:textColor="#9E9E9E"
+    android:textSize="12sp"
+    tools:text="727 byte"/>
+
+
+</LinearLayout>

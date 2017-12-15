@@ -266,7 +266,12 @@ public class RepositoryDetailFragment extends BaseFragment {
 
   @OnClick(R.id.viewCodeTv)
   protected void onViewCodeClick(View view) {
+    String loginName = mLoginNameTextView.getText().toString();
+    String repositoryName = mRepositoryNameTextView.getText().toString();
 
+    if (mActivityInteractor != null) {
+      mActivityInteractor.onViewCodeClick(RepositoryDetailFragment.this, loginName, repositoryName);
+    }
   }
 
   @OnClick(R.id.loginNameTv)

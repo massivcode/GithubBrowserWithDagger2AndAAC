@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import butterknife.ButterKnife;
+import com.massivcode.githubbrowserwithdagger2andaac.utils.log.DLogger;
 
 /**
  * Created by massivcode@gmail.com on 2017-12-12.
@@ -51,6 +52,8 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     int backStackEntryCount = fragmentManager.getBackStackEntryCount();
 
+    DLogger.i(backStackEntryCount + "");
+
     if (backStackEntryCount == 0) {
       return null;
     }
@@ -59,6 +62,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         .getBackStackEntryAt(backStackEntryCount - 1);
 
     if (backStackEntry == null) {
+      DLogger.i("backStackEntry null return");
       return null;
     }
 
@@ -115,12 +119,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     FragmentManager supportFragmentManager = getSupportFragmentManager();
     int fragmentBackStackCount = supportFragmentManager.getBackStackEntryCount();
 
-    if (fragmentBackStackCount == 1) {
-      return true;
-    }
-
-    supportFragmentManager.popBackStackImmediate();
-    return false;
+    return fragmentBackStackCount == 1;
   }
 
   protected void replaceFragment(@IdRes int containerId, Fragment fragment) {

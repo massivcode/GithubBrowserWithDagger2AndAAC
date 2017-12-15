@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -27,6 +28,7 @@ import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.friends.F
 import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.overview.OverviewFragment;
 import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.overview.OverviewMenuItem;
 import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.repository.RepositoriesFragment;
+import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.repository.contents.RepositoryContentsFragment;
 import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.repository.detail.RepositoryDetailFragment;
 import com.massivcode.githubbrowserwithdagger2andaac.utils.images.ImageLoader;
 import com.massivcode.githubbrowserwithdagger2andaac.utils.log.DLogger;
@@ -35,7 +37,8 @@ import com.massivcode.githubbrowserwithdagger2andaac.utils.log.DLogger;
 public class MainActivity extends BaseActivity
     implements NavigationView.OnNavigationItemSelectedListener,
     OverviewFragment.ActivityInteractor, RepositoriesFragment.ActivityInteractor,
-    FriendsFragment.ActivityInteractor, RepositoryDetailFragment.ActivityInteractor {
+    FriendsFragment.ActivityInteractor, RepositoryDetailFragment.ActivityInteractor,
+    RepositoryContentsFragment.ActivityInteractor {
 
   @BindView(R.id.toolbar)
   Toolbar mToolbar;
@@ -119,13 +122,29 @@ public class MainActivity extends BaseActivity
   public void onBackPressed() {
     if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
       mDrawerLayout.closeDrawer(GravityCompat.START);
+    } else if (isBackStackEmpty()) {
+      DLogger.i("isBackStackEmpty-> finish");
+      finish();
     } else {
-      if (isBackStackEmpty()) {
-        DLogger.i("isBackStackEmpty-> finish");
-        finish();
+      Fragment currentFragment = getCurrentFragment();
+
+      if (currentFragment == null) {
+        super.onBackPressed();
+      } else if (currentFragment instanceof RepositoryContentsFragment) {
+        RepositoryContentsFragment fragment = (RepositoryContentsFragment) currentFragment;
+
+        if (fragment.getPathStackCount() != 1) {
+          fragment.onBackPressed();
+          return;
+        }
+
+        super.onBackPressed();
+      } else {
+        super.onBackPressed();
       }
     }
   }
+
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
@@ -212,6 +231,11 @@ public class MainActivity extends BaseActivity
   @Override
   public void onViewCodeClick(RepositoryDetailFragment fragment, String loginName,
       String repositoryName) {
+    addFragment(R.id.fragmentContainer, RepositoryContentsFragment.newInstance(loginName, repositoryName));
+  }
+
+  @Override
+  public void onRepositoryContentsFileClick(String loginName, String repositoryName, String path) {
 
   }
 }
