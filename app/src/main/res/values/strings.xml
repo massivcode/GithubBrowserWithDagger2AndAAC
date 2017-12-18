@@ -22,4 +22,7 @@
   <string name="createdAtFormat">Created at {D}</string>
   <string name="updatedAtFormat">Updated at {D}</string>
   <string name="pushedAtForamt">Pushed at {D}</string>
+  <string name="files_count_format">{C} files</string>
+  <string name="comments_count_format">{C} comments</string>
+  <string name="gist_updated_date_format">Last active {D}</string>
 </resources>

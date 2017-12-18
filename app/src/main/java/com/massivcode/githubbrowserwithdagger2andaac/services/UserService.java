@@ -35,5 +35,7 @@ public interface UserService {
       @Query("page") int page);
 
   @GET("users/{loginName}/gists")
-  Call<List<GistResponse>> fetchGists(@Path("loginName") String userLoginName);
+  Call<List<GistResponse>> fetchGists(
+      @Path("loginName") String userLoginName,
+      @Query("page") int page);
 }

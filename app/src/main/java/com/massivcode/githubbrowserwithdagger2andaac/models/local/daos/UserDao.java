@@ -2,6 +2,7 @@ package com.massivcode.githubbrowserwithdagger2andaac.models.local.daos;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
+import com.massivcode.githubbrowserwithdagger2andaac.models.local.Gist;
 import com.massivcode.githubbrowserwithdagger2andaac.models.local.Repository;
 import com.massivcode.githubbrowserwithdagger2andaac.models.local.User;
 import com.massivcode.githubbrowserwithdagger2andaac.utils.log.DLogger;
@@ -43,6 +44,15 @@ public class UserDao extends BaseDao<User> {
     RealmList<Repository> managedList = new RealmList<>();
     managedList.addAll(managed);
     user.setRepositories(managedList);
+    mRealm.commitTransaction();
+  }
+
+  public void addGists(User user, RealmList<Gist> gists) {
+    mRealm.beginTransaction();
+    List<Gist> managed = mRealm.copyToRealmOrUpdate(gists);
+    RealmList<Gist> managedList = new RealmList<>();
+    managedList.addAll(managed);
+    user.setGists(managedList);
     mRealm.commitTransaction();
   }
 

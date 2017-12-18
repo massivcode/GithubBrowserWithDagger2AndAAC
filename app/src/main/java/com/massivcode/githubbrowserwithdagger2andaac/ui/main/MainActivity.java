@@ -25,6 +25,7 @@ import com.massivcode.githubbrowserwithdagger2andaac.models.local.User;
 import com.massivcode.githubbrowserwithdagger2andaac.repositories.Resource;
 import com.massivcode.githubbrowserwithdagger2andaac.repositories.Status;
 import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.friends.FriendsFragment;
+import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.gists.GistsFragment;
 import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.overview.OverviewFragment;
 import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.overview.OverviewMenuItem;
 import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.repository.RepositoriesFragment;
@@ -179,7 +180,7 @@ public class MainActivity extends BaseActivity
     if (id == R.id.nav_repository) {
       addFragment(R.id.fragmentContainer, RepositoriesFragment.newInstance(loginName));
     } else if (id == R.id.nav_gists) {
-      DLogger.d("gists");
+      addFragment(R.id.fragmentContainer, GistsFragment.newInstance(loginName));
     } else if (id == R.id.nav_followers) {
       addFragment(R.id.fragmentContainer, FriendsFragment.newInstance(loginName, true));
     } else if (id == R.id.nav_following) {

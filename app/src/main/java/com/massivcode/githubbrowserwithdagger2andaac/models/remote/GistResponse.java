@@ -1,18 +1,21 @@
 package com.massivcode.githubbrowserwithdagger2andaac.models.remote;
 
+import android.support.annotation.NonNull;
 import com.google.gson.annotations.SerializedName;
 import com.massivcode.githubbrowserwithdagger2andaac.models.local.Gist;
+import com.massivcode.githubbrowserwithdagger2andaac.models.local.GistComment;
 import com.massivcode.githubbrowserwithdagger2andaac.models.local.GistFile;
 import io.realm.RealmList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 /**
  * Created by massivcode@gmail.com on 2017-12-11.
  */
 
-public class GistResponse {
+public class GistResponse implements Comparable<GistResponse> {
 
   private String id;
   private LinkedHashMap<String, GistFileResponse> files;
@@ -33,6 +36,8 @@ public class GistResponse {
 
   @SerializedName("truncated")
   private boolean isTruncated;
+
+  private List<GistCommentResponse> commentsResponse;
 
   public String getId() {
     return id;
@@ -74,6 +79,15 @@ public class GistResponse {
     return isTruncated;
   }
 
+  public List<GistCommentResponse> getCommentsResponse() {
+    return commentsResponse;
+  }
+
+  public void setCommentsResponse(
+      List<GistCommentResponse> commentsResponse) {
+    this.commentsResponse = commentsResponse;
+  }
+
   @Override
   public String toString() {
     return "GistResponse{" +
@@ -102,8 +116,32 @@ public class GistResponse {
       }
     }
 
+    RealmList<GistComment> gistComments = new RealmList<>();
+
+    if (commentsResponse != null && !commentsResponse.isEmpty()) {
+      for (GistCommentResponse each : commentsResponse) {
+        gistComments.add(each.toGistComment());
+      }
+    }
+
     Gist gist = new Gist(id, isPublic, createdAt, updatedAt, description, comments, user, owner.toOwner(), isTruncated);
     gist.setFiles(gistFiles);
+    gist.setGistComments(gistComments);
     return gist;
+  }
+
+  @Override
+  public int compareTo(@NonNull GistResponse gistResponse) {
+    Date targetUpdatedAt = gistResponse.updatedAt;
+
+    if (updatedAt.equals(targetUpdatedAt)) {
+      return 0;
+    }
+
+    if (updatedAt.after(targetUpdatedAt)) {
+      return -1;
+    } else {
+      return 1;
+    }
   }
 }
