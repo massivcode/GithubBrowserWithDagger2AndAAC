@@ -20,12 +20,14 @@ import android.widget.TextView;
 import butterknife.BindView;
 import com.massivcode.githubbrowserwithdagger2andaac.R;
 import com.massivcode.githubbrowserwithdagger2andaac.base.BaseActivity;
+import com.massivcode.githubbrowserwithdagger2andaac.models.local.Gist;
 import com.massivcode.githubbrowserwithdagger2andaac.models.local.Repository;
 import com.massivcode.githubbrowserwithdagger2andaac.models.local.User;
 import com.massivcode.githubbrowserwithdagger2andaac.repositories.Resource;
 import com.massivcode.githubbrowserwithdagger2andaac.repositories.Status;
 import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.friends.FriendsFragment;
 import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.gists.GistsFragment;
+import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.gists.viewer.GistViewerFragment;
 import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.overview.OverviewFragment;
 import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.overview.OverviewMenuItem;
 import com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.repository.RepositoriesFragment;
@@ -40,7 +42,7 @@ public class MainActivity extends BaseActivity
     implements NavigationView.OnNavigationItemSelectedListener,
     OverviewFragment.ActivityInteractor, RepositoriesFragment.ActivityInteractor,
     FriendsFragment.ActivityInteractor, RepositoryDetailFragment.ActivityInteractor,
-    RepositoryExplorerFragment.ActivityInteractor {
+    RepositoryExplorerFragment.ActivityInteractor, GistsFragment.ActivityInteractor {
 
   @BindView(R.id.toolbar)
   Toolbar mToolbar;
@@ -242,5 +244,10 @@ public class MainActivity extends BaseActivity
   public void onRepositoryContentsFileClick(String loginName, String repositoryName, String path) {
     addFragment(R.id.fragmentContainer,
         RepositoryContentsViewerFragment.newInstance(loginName, repositoryName, path));
+  }
+
+  @Override
+  public void onGistItemClicked(GistsFragment fragment, String loginName, Gist gist) {
+    addFragment(R.id.fragmentContainer, GistViewerFragment.newInstance(loginName, gist.getId()));
   }
 }

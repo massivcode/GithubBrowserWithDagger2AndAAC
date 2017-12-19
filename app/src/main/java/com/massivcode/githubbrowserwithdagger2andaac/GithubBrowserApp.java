@@ -42,9 +42,9 @@ public class GithubBrowserApp extends Application {
 
     boolean initSuccessful = GithubLanguageColorMapper.init(this);
     RemainsDateTimeFormatter
-        .init("seconds ago", "minutes ago",
-            "hours ago", "days ago",
-            "months ago", "years ago",
+        .init(" seconds ago", " minutes ago",
+            " hours ago", " days ago",
+            " months ago", " years ago",
             DateTimePatterns.SHORT, DateTimePatterns.SHORT);
   }
 

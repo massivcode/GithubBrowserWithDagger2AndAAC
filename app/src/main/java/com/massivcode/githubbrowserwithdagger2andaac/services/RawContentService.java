@@ -17,4 +17,9 @@ public interface RawContentService {
       @Path("repositoryName") String repositoryName,
       @Path("fileName") String fileName
   );
+
+  @GET("{identifier}")
+  Call<String> fetchGistContent(
+      @Path(value = "identifier", encoded = true) String identifier
+  );
 }

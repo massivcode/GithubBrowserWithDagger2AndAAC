@@ -25,4 +25,5 @@
   <string name="files_count_format">{C} files</string>
   <string name="comments_count_format">{C} comments</string>
   <string name="gist_updated_date_format">Last active {D}</string>
+  <string name="commented_format">commented {D}</string>
 </resources>

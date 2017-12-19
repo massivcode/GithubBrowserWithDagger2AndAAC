@@ -34,4 +34,17 @@ public class GistDao extends BaseDao<Gist> {
     return mutableLiveData;
   }
 
+  public MutableLiveData<Gist> findGist(String loginName, String gistId) {
+    Gist gist =
+        mRealm
+            .where(Gist.class)
+            .equalTo("owner.loginName", loginName)
+            .equalTo("id", gistId)
+            .findFirst();
+
+    MutableLiveData<Gist> mutableLiveData = new MutableLiveData<>();
+    mutableLiveData.setValue(gist);
+    return mutableLiveData;
+  }
+
 }

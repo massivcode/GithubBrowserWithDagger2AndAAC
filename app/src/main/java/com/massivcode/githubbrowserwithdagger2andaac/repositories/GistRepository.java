@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
@@ -163,5 +165,49 @@ public class GistRepository {
 
       mLiveData.setValue(results);
     }
+  }
+
+  public LiveData<Resource<Gist>> getGist(final User user, final String gistId) {
+    return new NetworkBoundResource<Gist>() {
+
+      @Override
+      protected LiveData<Gist> loadFromDb() {
+        return mGistDao.findGist(user.getLoginName(), gistId);
+      }
+
+      @Override
+      protected boolean shouldFetch(LiveData<Gist> dbSource) {
+        return dbSource == null || dbSource.getValue() == null;
+      }
+
+      @Override
+      protected MutableLiveData<Gist> fetchFromServer() {
+        final MutableLiveData<Gist> gistMutableLiveData = new MutableLiveData<>();
+
+        mGistService.fetchGist(gistId).enqueue(new Callback<GistResponse>() {
+          @Override
+          public void onResponse(Call<GistResponse> call, Response<GistResponse> response) {
+            if (response.isSuccessful()) {
+              GistResponse gistResponse = response.body();
+
+              if (gistResponse != null) {
+                gistMutableLiveData.setValue(gistResponse.toGist());
+              }
+            }
+          }
+
+          @Override
+          public void onFailure(Call<GistResponse> call, Throwable t) {
+
+          }
+        });
+
+        return gistMutableLiveData;
+      }
+
+      @Override
+      protected void saveCallResult(Gist data) {
+      }
+    }.getAsLiveData();
   }
 }

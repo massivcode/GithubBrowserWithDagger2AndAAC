@@ -1,14 +1,12 @@
-package com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.gists;
+package com.massivcode.githubbrowserwithdagger2andaac.ui.main.fragments.gists.viewer;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ProgressBar;
 import butterknife.BindView;
 import com.massivcode.githubbrowserwithdagger2andaac.R;
@@ -17,34 +15,33 @@ import com.massivcode.githubbrowserwithdagger2andaac.models.local.Gist;
 import com.massivcode.githubbrowserwithdagger2andaac.models.local.User;
 import com.massivcode.githubbrowserwithdagger2andaac.repositories.Resource;
 import com.massivcode.githubbrowserwithdagger2andaac.repositories.Status;
-import java.util.List;
 
 /**
- * Created by massivcode@gmail.com on 2017-12-12.
+ * Created by massivcode@gmail.com on 2017-12-19.
  */
 
-public class GistsFragment extends BaseFragment {
+public class GistViewerFragment extends BaseFragment {
 
-  public interface ActivityInteractor {
+  @BindView(R.id.gistFilesRv)
+  RecyclerView mGistFilesRecyclerView;
 
-    void onGistItemClicked(GistsFragment fragment, String loginName, Gist gist);
-  }
-
-  @BindView(R.id.gistsRv)
-  RecyclerView mGistsRecyclerView;
+  @BindView(R.id.gistCommentsRv)
+  RecyclerView mGistCommentsRecyclerView;
 
   @BindView(R.id.progressBar)
   ProgressBar mProgressBar;
 
   private String mLoginName;
-  private GistsAdapter mGistsAdapter;
-  private ActivityInteractor mActivityInteractor;
+  private String mGistId;
+  private GistFilesAdapter mGistFilesAdapter;
+  private GistCommentsAdapter mGistCommentsAdapter;
 
-  public static GistsFragment newInstance(String loginName) {
-    GistsFragment fragment = new GistsFragment();
+  public static GistViewerFragment newInstance(String loginName, String gistId) {
+    GistViewerFragment fragment = new GistViewerFragment();
 
     Bundle args = new Bundle();
     args.putString("loginName", loginName);
+    args.putString("gistId", gistId);
     fragment.setArguments(args);
 
     return fragment;
@@ -58,44 +55,34 @@ public class GistsFragment extends BaseFragment {
 
     if (args != null) {
       mLoginName = args.getString("loginName");
+      mGistId = args.getString("gistId");
     }
-  }
-
-  @Override
-  public void onAttach(Context context) {
-    super.onAttach(context);
-    mActivityInteractor = (ActivityInteractor) context;
   }
 
   @Override
   public int setLayoutId() {
-    return R.layout.fragment_gists;
+    return R.layout.fragment_gist_viewer;
   }
 
   @Override
   public void onViewBind() {
-    mGistsAdapter = new GistsAdapter(mOnGistClickListener);
-    mGistsRecyclerView
+    mGistFilesAdapter = new GistFilesAdapter();
+    mGistFilesRecyclerView
         .addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
-    mGistsRecyclerView.setAdapter(mGistsAdapter);
+    mGistFilesRecyclerView.setAdapter(mGistFilesAdapter);
+
+    mGistCommentsAdapter = new GistCommentsAdapter();
+    mGistCommentsRecyclerView
+        .addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+    mGistCommentsRecyclerView.setAdapter(mGistCommentsAdapter);
   }
-
-  private View.OnClickListener mOnGistClickListener = new OnClickListener() {
-    @Override
-    public void onClick(View view) {
-      Gist clickedGist = (Gist) view.getTag();
-
-      if (mActivityInteractor != null) {
-        mActivityInteractor.onGistItemClicked(GistsFragment.this, mLoginName, clickedGist);
-      }
-    }
-  };
 
   @Override
   public void onActivityCreated(@Nullable Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
 
-    final GistsViewModel viewModel = ViewModelProviders.of(this).get(GistsViewModel.class);
+    final GistViewerViewModel viewModel = ViewModelProviders.of(this)
+        .get(GistViewerViewModel.class);
 
     viewModel.getUserLiveData(mLoginName).observe(this, new Observer<Resource<User>>() {
       @Override
@@ -116,28 +103,31 @@ public class GistsFragment extends BaseFragment {
           return;
         }
 
-        viewModel.getGistLiveData(user)
-            .observe(GistsFragment.this, new Observer<Resource<List<Gist>>>() {
+        viewModel.getGistLiveData(user, mGistId).observe(GistViewerFragment.this,
+            new Observer<Resource<Gist>>() {
               @Override
-              public void onChanged(@Nullable Resource<List<Gist>> listResource) {
-                if (listResource == null) {
+              public void onChanged(@Nullable Resource<Gist> gistResource) {
+                if (gistResource == null) {
                   return;
                 }
 
-                if (listResource.status == Status.LOADING) {
+                if (gistResource.status == Status.LOADING) {
                   mProgressBar.setVisibility(View.VISIBLE);
                 } else {
                   mProgressBar.setVisibility(View.GONE);
                 }
 
-                mGistsAdapter.onDataChanged(listResource.data);
+                Gist gist = gistResource.data;
+
+                if (gist == null) {
+                  return;
+                }
+
+                mGistFilesAdapter.onDataChanged(gist.getFiles());
+                mGistCommentsAdapter.onDataChanged(gist.getGistComments());
               }
             });
-
       }
     });
-
   }
-
-
 }

@@ -105,8 +105,8 @@ public class GistsAdapter extends RecyclerView.Adapter<Holder> {
         public void onClick(View view) {
           Gist item = (Gist) view.getTag();
 
-          if (item.getComments() == 0 || item.getGistComments() == null
-              || item.getGistComments().size() == 0) {
+          if (item.getComments() == 0 && item.getGistComments() == null
+              && item.getGistComments().size() == 0) {
             return;
           }
 
